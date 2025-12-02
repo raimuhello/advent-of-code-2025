@@ -1,9 +1,11 @@
+package day1.day1part1
+
 import java.io.File
 import kotlin.math.abs
 
 fun main() {
 
-    val lines: List<String> = File("src\\Day1_input.txt").readLines()
+    val lines: List<String> = File("src\\day1\\Day1_input.txt").readLines()
     var currentDegrees = 50
     var password = 0
 
