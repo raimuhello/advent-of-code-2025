@@ -1,4 +1,4 @@
-package day1.day1part1
+package day1.part1
 
 import java.io.File
 import kotlin.math.abs
