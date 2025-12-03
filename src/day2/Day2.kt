@@ -1,13 +1,16 @@
-package day2.part1
+package day2
 
 import java.io.File
 
 
 fun main() {
-    var sum: Long = 0
     val ranges: List<String> = File("src\\day2\\Day2_input.txt").readText().split(",")
     val pairs: MutableList<Pair<Long, Long>> = mutableListOf()
-    val regex = Regex("^(.+)\\1$")
+    
+    var partOneSum: Long = 0
+    var partTwoSum: Long = 0
+    val partOneRegex = Regex("^(.+)\\1$")
+    val partTwoRegex = Regex("^(.+)\\1+$")
 
     for (range in ranges)
     {
@@ -19,11 +22,16 @@ fun main() {
     {
         for (i in pair.first .. pair.second)
         {
-            if (regex.matches(i.toString()))
+            if (partOneRegex.matches(i.toString()))
             {
-                sum += i
+                partOneSum += i
+            }
+            if (partTwoRegex.matches(i.toString()))
+            {
+                partTwoSum += i
             }
         }
     }
-    println(sum)
+    println("Part 1 sum: $partOneSum")
+    println("Part 2 sum: $partTwoSum")
 }
