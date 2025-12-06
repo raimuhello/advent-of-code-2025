@@ -29,5 +29,29 @@ fun main() {
             }
         }
     }
-    println(freshAvailableIngredients)
+    println("Fresh & Available ingredients: $freshAvailableIngredients")
+    println("Fresh Ingredients: ${countUniqueCoveredValues(freshRanges)}")
+}
+
+fun countUniqueCoveredValues(ranges: MutableList<Pair<Long, Long>>): Long {
+    val sorted = ranges.sortedBy { it.first }
+    val mergedRanges = mutableListOf<Pair<Long, Long>>()
+
+    for (range in sorted) {
+        if (mergedRanges.isEmpty()) {
+            mergedRanges.add(range)
+        } else {
+            val (lastStart, lastEnd) = mergedRanges.last()
+            val (currentStart, currentEnd) = range
+
+            if (currentStart <= lastEnd + 1) {
+                mergedRanges[mergedRanges.lastIndex] =
+                    lastStart to maxOf(lastEnd, currentEnd)
+            } else {
+                mergedRanges.add(range)
+            }
+        }
+    }
+
+    return mergedRanges.sumOf { (start, end) -> end - start + 1 }
 }
